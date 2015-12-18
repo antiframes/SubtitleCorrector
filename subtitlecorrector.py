@@ -22,12 +22,18 @@ with open(filename,"r") as infile:
 				units[2]=str(int(s)%60)+","+units[2][1]
 				if (int(s)%60)<10:
 					units[2]="0"+units[2]
-				minutes=int(s/60)
+				if s<0:
+					minutes=((s+1)/60)-1
+				else:
+					minutes=int(s/60)
 				m=int(units[1])+minutes
 				units[1]=str(int(m)%60)
 				if (int(m)%60)<10:
 					units[1]="0"+units[1]
-				hours=int(m/60)
+				if m<0:
+					hours=((m+1)/60)-1
+				else:
+					hours=int(m/60)
 				h=int(units[0])+hours
 				units[0]=str(int(h))
 				if (h)<10:
