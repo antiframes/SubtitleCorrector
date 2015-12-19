@@ -1,11 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
 import sys
+import io
 
 filename=sys.argv[1]
 seconds=float(sys.argv[2])
 count=1
 
 outstring=""
-with open(filename,"r") as infile:
+with io.open(filename,"r",encoding='ISO-8859-1') as infile:
 	subtitles=infile.read()
 	lines=subtitles.split("\n")
 	i=0
@@ -23,7 +26,7 @@ with open(filename,"r") as infile:
 				if (int(s)%60)<10:
 					units[2]="0"+units[2]
 				if s<0:
-					minutes=((s+1)/60)-1
+					minutes=int(((s+1)/60)-1)
 				else:
 					minutes=int(s/60)
 				m=int(units[1])+minutes
@@ -31,7 +34,7 @@ with open(filename,"r") as infile:
 				if (int(m)%60)<10:
 					units[1]="0"+units[1]
 				if m<0:
-					hours=((m+1)/60)-1
+					hours=int(((m+1)/60)-1)
 				else:
 					hours=int(m/60)
 				h=int(units[0])+hours
@@ -51,5 +54,5 @@ with open(filename,"r") as infile:
 			
 			count+=1
 		i+=1
-with open(filename,"w") as outfile:
+with io.open(filename,"w",encoding='ISO-8859-1') as outfile:
 	outfile.write(outstring)
